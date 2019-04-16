@@ -31,7 +31,9 @@
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
-  :config)
+  (setq evil-default-state 'emacs)
+  :config
+  (evil-mode 1))
 
 (use-package company
   :diminish company-mode
@@ -70,7 +72,10 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1))
 
+(use-package projectile-ripgrep)
+
 (use-package magit)
+(use-package json-mode)
 
 (use-package org-present
   :config

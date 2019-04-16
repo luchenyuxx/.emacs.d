@@ -16,7 +16,7 @@
  '(org-agenda-files (quote ("~/Sync/org/explorer-status-meeting-04042019.org")))
  '(package-selected-packages
    (quote
-    (org-present popup-imenu evil-collection magit projectile evil use-package)))
+    (json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-error-top-bottom nil)
