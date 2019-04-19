@@ -20,6 +20,7 @@
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-error-top-bottom nil)
+ '(show-paren-delay 0.5)
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil))

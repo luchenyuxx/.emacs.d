@@ -1,6 +1,5 @@
 ;; global variables
 (setq
- show-paren-delay 0.5
  ;; install package if not installed
  use-package-always-ensure t)
 
@@ -42,12 +41,6 @@
    company-idle-delay 0))
 (add-hook 'after-init-hook 'global-company-mode)
 
-(use-package ensime
-  :pin melpa-stable
-  :init
-  (setq ensime-search-interface 'ivy)
-  (setq ensime-startup-notification nil))
-
 (use-package ivy
   :diminish ivy-mode
   :init
@@ -56,10 +49,12 @@
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   :config
   (ivy-mode 1))
+
 (use-package counsel
   :diminish counsel-mode
   :config
   (counsel-mode 1))
+
 (use-package swiper
   :config)
 
