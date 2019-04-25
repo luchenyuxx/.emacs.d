@@ -35,14 +35,14 @@
   (evil-mode 1))
 
 (use-package company
-  :diminish company-mode
+  :diminish company
   :init
   (setq
    company-idle-delay 0))
 (add-hook 'after-init-hook 'global-company-mode)
 
 (use-package ivy
-  :diminish ivy-mode
+  :diminish ivy
   :init
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
@@ -51,7 +51,7 @@
   (ivy-mode 1))
 
 (use-package counsel
-  :diminish counsel-mode
+  :diminish counsel
   :config
   (counsel-mode 1))
 
@@ -71,6 +71,9 @@
 
 (use-package magit)
 (use-package json-mode)
+(use-package scala-mode)
+(use-package sbt-mode)
+(use-package haskell-mode)
 
 (use-package org-present
   :config
