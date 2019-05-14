@@ -74,6 +74,7 @@
 (use-package scala-mode)
 (use-package sbt-mode)
 (use-package haskell-mode)
+(use-package dockerfile-mode)
 
 (use-package org-present
   :config
