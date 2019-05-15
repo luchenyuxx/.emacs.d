@@ -36,14 +36,12 @@
 (use-package auto-package-update
   :config
   (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-default-state 'emacs)
-  :config
   (evil-mode 1))
 
 (use-package company
@@ -59,25 +57,23 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-  :config
   (ivy-mode 1))
 
 (use-package counsel
   :diminish counsel
-  :config
+  :init
   (counsel-mode 1))
 
-(use-package swiper
-  :config)
+(use-package swiper)
 
 (use-package projectile
   :pin melpa-stable
   :init
   (setq projectile-completion-system 'ivy)
+  (projectile-mode +1)
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package projectile-ripgrep)
 
