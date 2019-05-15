@@ -1,7 +1,6 @@
-;; global variables
-(setq
- ;; install package if not installed
- use-package-always-ensure t)
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -26,6 +25,19 @@
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile (require 'use-package))
+
+(require 'use-package-ensure)
+(setq
+ ;; install package if not installed
+ use-package-always-defer t
+ use-package-always-ensure t)
+
+;; auto update packages
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
 
 (use-package evil
   :init
@@ -71,7 +83,8 @@
 
 (use-package magit)
 (use-package json-mode)
-(use-package scala-mode)
+(use-package scala-mode
+  :mode "\\.s\\(cala\\|bt\\)$")
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -85,23 +98,45 @@
 (use-package haskell-mode)
 (use-package dockerfile-mode)
 
-(use-package org-present
-  :config
-  (progn
-     (add-hook 'org-present-mode-hook
-               (lambda ()
-                 (org-present-big)
-                 (org-display-inline-images)
-                 (org-present-hide-cursor)
-                 (org-present-read-only)))
-     (add-hook 'org-present-mode-quit-hook
-               (lambda ()
-                 (org-present-small)
-                 (org-remove-inline-images)
-                 (org-present-show-cursor)
-                 (org-present-read-write)))))
+;;(use-package org-present
+;;  :config
+;;  (progn
+;;     (add-hook 'org-present-mode-hook
+;;               (lambda ()
+;;                 (org-present-big)
+;;                 (org-display-inline-images)
+;;                 (org-present-hide-cursor)
+;;                 (org-present-read-only)))
+;;     (add-hook 'org-present-mode-quit-hook
+;;               (lambda ()
+;;                 (org-present-small)
+;;                 (org-remove-inline-images)
+;;                 (org-present-show-cursor)
+;;                 (org-present-read-write)))))
+
+;; Enable nice rendering of diagnostics like compile errors.
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(use-package lsp-mode
+ :init (setq lsp-prefer-flymake nil))
+
+(use-package lsp-ui)
+
+;; Add company-lsp backend for metals
+(use-package company-lsp)
+
+(use-package lsp-scala
+  :after scala-mode
+  :demand t
+  ;; Optional - enable lsp-scala automatically in scala files
+  :hook (scala-mode . lsp))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
 
+;; Windmove: use Shift + Arrow keys to move between windows
 (when (fboundp 'windmove-default-keybindings) (windmove-default-keybindings))
+
+(provide 'init)
+;;; init.el ends here
