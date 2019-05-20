@@ -128,6 +128,11 @@
   ;; Optional - enable lsp-scala automatically in scala files
   :hook (scala-mode . lsp))
 
+(use-package neotree
+  :init
+  (setq projectile-switch-project-action 'neotree-projectile-action))
+(use-package tuareg)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
 
