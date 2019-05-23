@@ -42,7 +42,19 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-default-state 'emacs)
-  (evil-mode 1))
+  (evil-mode 1)
+  :config
+  (add-hook 'find-file-hook 'evil-normal-state)
+  (define-key evil-normal-state-map "M" 'windmove-down)
+  (define-key evil-normal-state-map "U" 'windmove-up)
+  (define-key evil-normal-state-map "H" 'windmove-left)
+  (define-key evil-normal-state-map "K" 'windmove-right)
+  (define-key evil-emacs-state-map "M" 'windmove-down)
+  (define-key evil-emacs-state-map "U" 'windmove-up)
+  (define-key evil-emacs-state-map "H" 'windmove-left)
+  (define-key evil-emacs-state-map "K" 'windmove-right)
+  (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+  )
 
 (use-package company
   :diminish company
@@ -132,6 +144,7 @@
   :init
   (setq projectile-switch-project-action 'neotree-projectile-action))
 (use-package tuareg)
+(use-package flycheck-ocaml)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
