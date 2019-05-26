@@ -7,7 +7,9 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(auto-save-default nil)
+ '(auto-save-interval 30)
+ '(auto-save-timeout 1)
+ '(auto-save-visited-mode t)
  '(column-number-mode t)
  '(create-lockfiles nil)
  '(custom-enabled-themes (quote (deeper-blue)))
@@ -18,6 +20,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(menu-bar-mode nil)
  '(neo-window-width 30)
  '(org-agenda-files (quote ("~/Sync/org/explorer-status-meeting-04042019.org")))
  '(package-selected-packages
