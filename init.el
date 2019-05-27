@@ -1,5 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
+
 ;;; Code:
 
 (add-to-list 'exec-path "/usr/local/bin")
@@ -49,6 +50,10 @@
   (define-key evil-normal-state-map "K" 'windmove-up)
   (define-key evil-normal-state-map "H" 'windmove-left)
   (define-key evil-normal-state-map "L" 'windmove-right)
+  (define-key evil-motion-state-map "J" 'windmove-down)
+  (define-key evil-motion-state-map "K" 'windmove-up)
+  (define-key evil-motion-state-map "H" 'windmove-left)
+  (define-key evil-motion-state-map "L" 'windmove-right)
   (define-key evil-emacs-state-map "J" 'windmove-down)
   (define-key evil-emacs-state-map "K" 'windmove-up)
   (define-key evil-emacs-state-map "H" 'windmove-left)
