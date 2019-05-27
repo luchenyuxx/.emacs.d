@@ -147,7 +147,8 @@
 
 (use-package neotree
   :init
-  (setq projectile-switch-project-action 'neotree-projectile-action))
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  (setq neo-autorefresh nil))
 (use-package tuareg)
 (use-package flycheck-ocaml)
 
