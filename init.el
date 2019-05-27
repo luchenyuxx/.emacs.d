@@ -158,5 +158,12 @@
 ;; Windmove: use Shift + Arrow keys to move between windows
 (when (fboundp 'windmove-default-keybindings) (windmove-default-keybindings))
 
+;; walk around xref-find-references fails with "Wrong type argument: hash-table-p, nil"
+;; in lsp mode
+(setq xref-prompt-for-identifier '(not xref-find-definitions
+                                            xref-find-definitions-other-window
+                                            xref-find-definitions-other-frame
+                                            xref-find-references))
+
 (provide 'init)
 ;;; init.el ends here
