@@ -49,19 +49,20 @@
   )
 
 (use-package undo-tree
+  :diminish
   :init
   (global-set-key (kbd "s-z") 'undo-tree-undo)
   (global-set-key (kbd "s-Z") 'undo-tree-redo))
 
 (use-package company
-  :diminish company
+  :diminish
   :init
   (setq
    company-idle-delay 0))
 (add-hook 'after-init-hook 'global-company-mode)
 
 (use-package ivy
-  :diminish ivy
+  :diminish
   :init
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
@@ -69,7 +70,7 @@
   (ivy-mode 1))
 
 (use-package counsel
-  :diminish counsel
+  :diminish
   :init
   (counsel-mode 1))
 
@@ -78,6 +79,7 @@
   (global-set-key (kbd "C-s") 'swiper))
 
 (use-package projectile
+  :diminish
   :pin melpa-stable
   :init
   (setq projectile-completion-system 'ivy)
@@ -124,6 +126,7 @@
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
+  :diminish
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
