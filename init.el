@@ -36,6 +36,8 @@
   (setq auto-package-update-delete-old-versions t)
   (auto-package-update-maybe))
 
+(use-package diminish)
+
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
