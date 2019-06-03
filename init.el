@@ -5,9 +5,7 @@
 
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-
-;; modes
-;; (electric-indent-mode 0)
+(setenv "EDITOR" "emacsclient")
 
 ;; the package manager
 (require 'package)
@@ -26,7 +24,6 @@
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile (require 'use-package))
-
 (require 'use-package-ensure)
 (setq
  ;; install package if not installed
@@ -46,20 +43,13 @@
   (evil-mode 1)
   :config
   (add-hook 'find-file-hook 'evil-normal-state)
-  (define-key evil-normal-state-map "J" 'windmove-down)
-  (define-key evil-normal-state-map "K" 'windmove-up)
-  (define-key evil-normal-state-map "H" 'windmove-left)
-  (define-key evil-normal-state-map "L" 'windmove-right)
-  (define-key evil-motion-state-map "J" 'windmove-down)
-  (define-key evil-motion-state-map "K" 'windmove-up)
-  (define-key evil-motion-state-map "H" 'windmove-left)
-  (define-key evil-motion-state-map "L" 'windmove-right)
-  (define-key evil-emacs-state-map "J" 'windmove-down)
-  (define-key evil-emacs-state-map "K" 'windmove-up)
-  (define-key evil-emacs-state-map "H" 'windmove-left)
-  (define-key evil-emacs-state-map "L" 'windmove-right)
   (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
   )
+
+(use-package undo-tree
+  :init
+  (global-set-key (kbd "s-z") 'undo-tree-undo)
+  (global-set-key (kbd "s-Z") 'undo-tree-redo))
 
 (use-package company
   :diminish company
@@ -73,7 +63,7 @@
   :init
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
   (ivy-mode 1))
 
 (use-package counsel
@@ -81,7 +71,9 @@
   :init
   (counsel-mode 1))
 
-(use-package swiper)
+(use-package swiper
+  :init
+  (global-set-key (kbd "C-s") 'swiper))
 
 (use-package projectile
   :pin melpa-stable
@@ -92,7 +84,8 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-(use-package projectile-ripgrep)
+;; (use-package projectile-ripgrep)
+(use-package ag)
 
 (use-package magit)
 (use-package json-mode)
@@ -149,14 +142,23 @@
   :init
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq neo-autorefresh nil))
+;; ocaml support
 (use-package tuareg)
 (use-package flycheck-ocaml)
+
+(use-package avy
+  :init
+  (global-set-key (kbd "s-f") 'avy-goto-char)
+  (global-set-key (kbd "s-F") 'avy-goto-word-1))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
 
-;; Windmove: use Shift + Arrow keys to move between windows
-(when (fboundp 'windmove-default-keybindings) (windmove-default-keybindings))
+(global-set-key (kbd "s-h") 'windmove-left)
+(global-set-key (kbd "s-j") 'windmove-down)
+(global-set-key (kbd "s-k") 'windmove-up)
+(global-set-key (kbd "s-l") 'windmove-right)
+(global-set-key (kbd "s-K") 'kill-current-buffer)
 
 ;; walk around xref-find-references fails with "Wrong type argument: hash-table-p, nil"
 ;; in lsp mode
@@ -164,6 +166,13 @@
                                             xref-find-definitions-other-window
                                             xref-find-definitions-other-frame
                                             xref-find-references))
+
+(defun find-user-init-file ()
+  "Edit the `user-init-file', in another window."
+  (interactive)
+  (find-file-other-window user-init-file))
+
+(global-set-key (kbd "s-,") 'find-user-init-file)
 
 (provide 'init)
 ;;; init.el ends here

@@ -25,13 +25,14 @@
  '(org-agenda-files (quote ("~/Sync/org/explorer-status-meeting-04042019.org")))
  '(package-selected-packages
    (quote
-    (flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
+    (diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-error-top-bottom nil)
  '(show-paren-delay 0.5)
  '(show-paren-mode t)
  '(tab-width 4)
+ '(term-buffer-maximum-size 1024)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
