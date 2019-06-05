@@ -150,6 +150,7 @@
 ;; ocaml support
 (use-package tuareg)
 (use-package flycheck-ocaml)
+(use-package yaml-mode)
 
 (use-package avy
   :init
@@ -178,6 +179,7 @@
   (find-file-other-window user-init-file))
 
 (global-set-key (kbd "s-,") 'find-user-init-file)
+(server-start)
 
 (provide 'init)
 ;;; init.el ends here
