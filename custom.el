@@ -25,9 +25,10 @@
  '(org-agenda-files (quote ("~/Sync/org/explorer-status-meeting-04042019.org")))
  '(package-selected-packages
    (quote
-    (yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
+    (cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
+ '(scroll-conservatively 100)
  '(scroll-error-top-bottom nil)
  '(show-paren-delay 0.5)
  '(show-paren-mode t)

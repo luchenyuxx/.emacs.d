@@ -42,10 +42,18 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-default-state 'emacs)
+  (setq evil-disable-insert-state-bindings t)
+  (global-set-key (kbd "M-n") 'evil-complete-next)
+  (global-set-key (kbd "M-p") 'evil-complete-previous)
+  (global-set-key (kbd "C-=") 'evil-indent)
   (evil-mode 1)
   :config
   (add-hook 'find-file-hook 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+  (define-key evil-normal-state-map (kbd "f") 'avy-goto-char)
+  (define-key evil-normal-state-map (kbd "F") 'avy-goto-word-1)
+  (define-key evil-visual-state-map (kbd "f") 'avy-goto-char)
+  (define-key evil-visual-state-map (kbd "F") 'avy-goto-word-1)
   )
 
 (use-package undo-tree
@@ -86,6 +94,8 @@
   (projectile-mode +1)
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "s-[") 'projectile-previous-project-buffer)
+  (define-key projectile-mode-map (kbd "s-]") 'projectile-next-project-buffer)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;; (use-package projectile-ripgrep)
@@ -148,9 +158,14 @@
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq neo-autorefresh nil))
 ;; ocaml support
+
 (use-package tuareg)
+
 (use-package flycheck-ocaml)
+
 (use-package yaml-mode)
+
+(use-package cql-mode)
 
 (use-package avy
   :init
@@ -166,6 +181,7 @@
 (global-set-key (kbd "s-l") 'windmove-right)
 (global-set-key (kbd "s-K") 'kill-current-buffer)
 
+
 ;; walk around xref-find-references fails with "Wrong type argument: hash-table-p, nil"
 ;; in lsp mode
 (setq xref-prompt-for-identifier '(not xref-find-definitions
@@ -177,9 +193,19 @@
   "Edit the `user-init-file', in another window."
   (interactive)
   (find-file-other-window user-init-file))
-
 (global-set-key (kbd "s-,") 'find-user-init-file)
+
 (server-start)
+
+;; responde y or n instead of yes or no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; set default term to zsh
+(defvar my-term-shell "/usr/local/bin/zsh")
+(defadvice ansi-term (before force-bash)
+  (interactive (list my-term-shell)))
+(ad-activate 'ansi-term)
+(global-set-key (kbd "<s-return>") 'ansi-term)
 
 (provide 'init)
 ;;; init.el ends here
