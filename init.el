@@ -124,7 +124,9 @@
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
-  :init (setq lsp-prefer-flymake nil))
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook (scala-mode . lsp)
+  :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
 
