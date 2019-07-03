@@ -7,6 +7,7 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setenv "EDITOR" "emacsclient")
 
+
 ;; the package manager
 (require 'package)
 (setq
@@ -14,7 +15,7 @@
                     ("org" . "http://orgmode.org/elpa/")
                     ("melpa" . "http://melpa.org/packages/")
                     ("melpa-stable" . "http://stable.melpa.org/packages/"))
- package-archive-priorities '(("melpa-stable" . 1)))
+ package-archive-priorities '(("melpa" . 1)))
 
 (package-initialize)
 
@@ -103,8 +104,19 @@
 
 (use-package magit)
 (use-package json-mode)
+(use-package haskell-mode)
+(use-package dockerfile-mode)
+(use-package yasnippet
+  :init
+  (yas-global-mode 1))
+
+;;; ===========================================================
+;;; ==================== Set up scala metals ==================
+;;; ===========================================================
+
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\)$")
+
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -114,9 +126,6 @@
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
-(use-package sbt-mode)
-(use-package haskell-mode)
-(use-package dockerfile-mode)
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
@@ -124,6 +133,9 @@
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
+  :bind
+  (:map lsp-mode-map
+        ("M-?" . lsp-find-references))
   ;; Optional - enable lsp-mode automatically in scala files
   :hook (scala-mode . lsp)
   :config (setq lsp-prefer-flymake nil))
@@ -132,6 +144,10 @@
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
+
+;;; ===========================================================
+;;; ===========================================================
+;;; ===========================================================
 
 (use-package neotree
   :init
