@@ -52,6 +52,7 @@
   (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
   (define-key evil-normal-state-map (kbd "f") 'avy-goto-char)
   (define-key evil-normal-state-map (kbd "F") 'avy-goto-word-1)
+  (define-key evil-normal-state-map (kbd "/") 'swiper)
   (define-key evil-visual-state-map (kbd "f") 'avy-goto-char)
   (define-key evil-visual-state-map (kbd "F") 'avy-goto-word-1)
   )
@@ -98,7 +99,6 @@
   (define-key projectile-mode-map (kbd "s-]") 'projectile-next-project-buffer)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-;; (use-package projectile-ripgrep)
 (use-package ag)
 
 (use-package magit)
@@ -118,40 +118,18 @@
 (use-package haskell-mode)
 (use-package dockerfile-mode)
 
-;;(use-package org-present
-;;  :config
-;;  (progn
-;;     (add-hook 'org-present-mode-hook
-;;               (lambda ()
-;;                 (org-present-big)
-;;                 (org-display-inline-images)
-;;                 (org-present-hide-cursor)
-;;                 (org-present-read-only)))
-;;     (add-hook 'org-present-mode-quit-hook
-;;               (lambda ()
-;;                 (org-present-small)
-;;                 (org-remove-inline-images)
-;;                 (org-present-show-cursor)
-;;                 (org-present-read-write)))))
-
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
   :diminish
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
- :init (setq lsp-prefer-flymake nil))
+  :init (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
-
-(use-package lsp-scala
-  :after scala-mode
-  :demand t
-  ;; Optional - enable lsp-scala automatically in scala files
-  :hook (scala-mode . lsp))
 
 (use-package neotree
   :init
@@ -181,13 +159,12 @@
 (global-set-key (kbd "s-l") 'windmove-right)
 (global-set-key (kbd "s-K") 'kill-current-buffer)
 
-
 ;; walk around xref-find-references fails with "Wrong type argument: hash-table-p, nil"
 ;; in lsp mode
 (setq xref-prompt-for-identifier '(not xref-find-definitions
-                                            xref-find-definitions-other-window
-                                            xref-find-definitions-other-frame
-                                            xref-find-references))
+                                       xref-find-definitions-other-window
+                                       xref-find-definitions-other-frame
+                                       xref-find-references))
 
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window."
@@ -206,6 +183,8 @@
   (interactive (list my-term-shell)))
 (ad-activate 'ansi-term)
 (global-set-key (kbd "<s-return>") 'ansi-term)
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (provide 'init)
 ;;; init.el ends here
