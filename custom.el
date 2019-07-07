@@ -22,10 +22,47 @@
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(neo-window-width 30)
- '(org-agenda-files (quote ("~/Sync/org/explorer-status-meeting-04042019.org")))
+ '(org-structure-template-alist
+   (quote
+    (("s" "#+BEGIN_SRC ?
+
+#+END_SRC")
+     ("e" "#+BEGIN_EXAMPLE
+?
+#+END_EXAMPLE")
+     ("q" "#+BEGIN_QUOTE
+?
+#+END_QUOTE")
+     ("v" "#+BEGIN_VERSE
+?
+#+END_VERSE")
+     ("V" "#+BEGIN_VERBATIM
+?
+#+END_VERBATIM")
+     ("c" "#+BEGIN_CENTER
+?
+#+END_CENTER")
+     ("C" "#+BEGIN_COMMENT
+?
+#+END_COMMENT")
+     ("l" "#+BEGIN_EXPORT latex
+?
+#+END_EXPORT")
+     ("L" "#+LaTeX: ")
+     ("h" "#+BEGIN_EXPORT html
+?
+#+END_EXPORT")
+     ("H" "#+HTML: ")
+     ("a" "#+BEGIN_EXPORT ascii
+?
+#+END_EXPORT")
+     ("A" "#+ASCII: ")
+     ("i" "#+INDEX: ?")
+     ("I" "#+INCLUDE: %file ?")
+     ("t" "#+TITLE: ?"))))
  '(package-selected-packages
    (quote
-    (cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
+    (newcomment cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)

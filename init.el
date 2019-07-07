@@ -33,43 +33,43 @@
 
 ;; auto update packages
 (use-package auto-package-update
-  :config
+  :init
   (setq auto-package-update-delete-old-versions t)
   (auto-package-update-maybe))
 
 (use-package diminish)
 
 (use-package evil
+  ;; Equivalent to (add-hook 'find-file-hook 'evil-normal-state)
+  :hook (find-file . evil-normal-state)
+  :bind
+  ;; Equivalent to (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+  (:map evil-normal-state-map
+        ("M-." . xref-find-definitions)
+        ("f" . avy-goto-char)
+        ("F" . avy-goto-word-1)
+        ("/" . swiper)
+        :map evil-visual-state-map
+        ("f" . avy-goto-char)
+        ("F" . avy-goto-word-1))
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-default-state 'emacs)
   (setq evil-disable-insert-state-bindings t)
-  (global-set-key (kbd "M-n") 'evil-complete-next)
-  (global-set-key (kbd "M-p") 'evil-complete-previous)
-  (global-set-key (kbd "C-=") 'evil-indent)
   (evil-mode 1)
-  :config
-  (add-hook 'find-file-hook 'evil-normal-state)
-  (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
-  (define-key evil-normal-state-map (kbd "f") 'avy-goto-char)
-  (define-key evil-normal-state-map (kbd "F") 'avy-goto-word-1)
-  (define-key evil-normal-state-map (kbd "/") 'swiper)
-  (define-key evil-visual-state-map (kbd "f") 'avy-goto-char)
-  (define-key evil-visual-state-map (kbd "F") 'avy-goto-word-1)
   )
 
 (use-package undo-tree
-  :diminish
-  :init
-  (global-set-key (kbd "s-z") 'undo-tree-undo)
-  (global-set-key (kbd "s-Z") 'undo-tree-redo))
+  ;; Equivalent to (bind-key "s-z" 'undo-tree-undo)
+  :bind (("s-z" . undo-tree-undo)
+         ("s-Z" . undo-tree-redo))
+  :diminish)
 
 (use-package company
+  :hook (after-init . global-company-mode)
   :diminish
   :init
-  (setq
-   company-idle-delay 0))
-(add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0))
 
 (use-package ivy
   :diminish
@@ -90,15 +90,16 @@
 
 (use-package projectile
   :diminish
-  :pin melpa-stable
+  :bind
+  (:map projectile-mode-map
+        ("s-p" . projectile-command-map)
+        ("s-[" . projectile-previous-project-buffer)
+        ("s-]" . projectile-next-project-buffer)
+        ("C-c p" . projectile-command-map))
   :init
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "s-[") 'projectile-previous-project-buffer)
-  (define-key projectile-mode-map (kbd "s-]") 'projectile-next-project-buffer)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  )
 
 (use-package ag)
 
@@ -107,8 +108,8 @@
 (use-package haskell-mode)
 (use-package dockerfile-mode)
 (use-package yasnippet
-  :init
-  (yas-global-mode 1))
+  :diminish
+  :init (yas-global-mode 1))
 
 ;;; ===========================================================
 ;;; ==================== Set up scala metals ==================
@@ -134,8 +135,7 @@
 
 (use-package lsp-mode
   :bind
-  (:map lsp-mode-map
-        ("M-?" . lsp-find-references))
+  (:map lsp-mode-map ("M-?" . lsp-find-references))
   ;; Optional - enable lsp-mode automatically in scala files
   :hook (scala-mode . lsp)
   :config (setq lsp-prefer-flymake nil))
@@ -168,14 +168,31 @@
   (global-set-key (kbd "s-f") 'avy-goto-char)
   (global-set-key (kbd "s-F") 'avy-goto-word-1))
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load-file custom-file)
+(use-package windmove
+  :bind (("s-h" . windmove-left)
+         ("s-j" . windmove-down)
+         ("s-k" . windmove-up)
+         ("s-l" . windmove-right)
+         ))
 
-(global-set-key (kbd "s-h") 'windmove-left)
-(global-set-key (kbd "s-j") 'windmove-down)
-(global-set-key (kbd "s-k") 'windmove-up)
-(global-set-key (kbd "s-l") 'windmove-right)
+;; (global-set-key (kbd "s-h") 'windmove-left)
+;; (global-set-key (kbd "s-j") 'windmove-down)
+;; (global-set-key (kbd "s-k") 'windmove-up)
+;; (global-set-key (kbd "s-l") 'windmove-right)
 (global-set-key (kbd "s-K") 'kill-current-buffer)
+
+;; set default term to zsh
+(use-package term
+  :bind ("<s-return>" . ansi-term)
+  :init
+  (defvar my-term-shell "/usr/local/bin/zsh")
+  (defadvice ansi-term (before force-bash)
+    (interactive (list my-term-shell)))
+  (ad-activate 'ansi-term)
+  )
+
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
 
 ;; walk around xref-find-references fails with "Wrong type argument: hash-table-p, nil"
 ;; in lsp mode
@@ -190,19 +207,16 @@
   (find-file-other-window user-init-file))
 (global-set-key (kbd "s-,") 'find-user-init-file)
 
+(setq custom-file "~/.emacs.d/custom.el")
+(load-file custom-file)
+
 (server-start)
 
 ;; responde y or n instead of yes or no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; set default term to zsh
-(defvar my-term-shell "/usr/local/bin/zsh")
-(defadvice ansi-term (before force-bash)
-  (interactive (list my-term-shell)))
-(ad-activate 'ansi-term)
-(global-set-key (kbd "<s-return>") 'ansi-term)
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "s-/") 'comment-region)
 
 (provide 'init)
 ;;; init.el ends here
