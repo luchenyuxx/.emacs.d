@@ -116,7 +116,7 @@
 ;;; ===========================================================
 
 (use-package scala-mode
-  :mode "\\.s\\(cala\\|bt\\)$")
+  :mode "\\.s\\(c\\|cala\\|bt\\)$")
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
