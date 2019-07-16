@@ -3,8 +3,10 @@
 
 ;;; Code:
 
+(defvar cargo-bin (expand-file-name "~/.cargo/bin"))
 (add-to-list 'exec-path "/usr/local/bin")
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(add-to-list 'exec-path cargo-bin)
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin))
 (setenv "EDITOR" "emacsclient")
 
 
@@ -88,6 +90,17 @@
   :init
   (global-set-key (kbd "C-s") 'swiper))
 
+
+(use-package ag)
+
+(use-package magit)
+(use-package json-mode)
+(use-package haskell-mode)
+(use-package dockerfile-mode)
+(use-package yasnippet
+  :diminish
+  :init (yas-global-mode 1))
+
 (use-package projectile
   :diminish
   :bind
@@ -100,16 +113,13 @@
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   )
+;;; ===========================================================
+;;; ==================== Set up rust ==========================
+;;; ===========================================================
 
-(use-package ag)
+;; You need to install rust LSP to get full support of Rust
 
-(use-package magit)
-(use-package json-mode)
-(use-package haskell-mode)
-(use-package dockerfile-mode)
-(use-package yasnippet
-  :diminish
-  :init (yas-global-mode 1))
+(use-package rust-mode)
 
 ;;; ===========================================================
 ;;; ==================== Set up scala metals ==================
@@ -137,7 +147,8 @@
   :bind
   (:map lsp-mode-map ("M-?" . lsp-find-references))
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook (scala-mode . lsp)
+  :hook ((scala-mode . lsp)
+         (rust-mode . lsp))
   :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
@@ -152,7 +163,8 @@
 (use-package neotree
   :init
   (setq projectile-switch-project-action 'neotree-projectile-action)
-  (setq neo-autorefresh nil))
+  (setq neo-autorefresh nil)
+  (defalias 'dired 'neotree-dir))
 ;; ocaml support
 
 (use-package tuareg)
@@ -214,7 +226,6 @@
 
 ;; responde y or n instead of yes or no
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 
 (global-set-key (kbd "s-/") 'comment-region)
 

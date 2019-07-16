@@ -62,7 +62,7 @@
      ("t" "#+TITLE: ?"))))
  '(package-selected-packages
    (quote
-    (newcomment cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection magit projectile evil use-package)))
+    (rust-mode newcomment cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)
