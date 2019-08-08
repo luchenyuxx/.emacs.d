@@ -48,9 +48,6 @@
   ;; Equivalent to (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
   (:map evil-normal-state-map
         ("M-." . xref-find-definitions)
-        ("f" . avy-goto-char)
-        ("F" . avy-goto-word-1)
-        ("/" . swiper)
         :map evil-visual-state-map
         ("f" . avy-goto-char)
         ("F" . avy-goto-word-1))
