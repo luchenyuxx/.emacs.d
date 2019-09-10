@@ -4,9 +4,11 @@
 ;;; Code:
 
 (defvar cargo-bin (expand-file-name "~/.cargo/bin"))
+(defvar local-bin (expand-file-name "~/.local/bin"))
 (add-to-list 'exec-path "/usr/local/bin")
 (add-to-list 'exec-path cargo-bin)
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin))
+(add-to-list 'exec-path local-bin)
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin))
 (setenv "EDITOR" "emacsclient")
 
 
@@ -152,6 +154,14 @@
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
+
+;;; ===========================================================
+;;; ==================== Set up haskell ==========================
+;;; ===========================================================
+
+(use-package intero
+  :init
+  (add-hook 'haskell-mode-hook 'intero-mode))
 
 ;;; ===========================================================
 ;;; ===========================================================
