@@ -19,7 +19,7 @@
  '(fill-column 80)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(lsp-response-timeout 100)
+ '(lsp-restart (quote ignore))
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(neo-window-width 30)
