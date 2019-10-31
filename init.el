@@ -94,6 +94,7 @@
 
 (use-package magit)
 (use-package json-mode)
+(use-package js2-mode)
 (use-package haskell-mode)
 (use-package dockerfile-mode)
 (use-package yasnippet
@@ -233,8 +234,6 @@
 
 ;; responde y or n instead of yes or no
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-(global-set-key (kbd "s-/") 'comment-region)
 
 (provide 'init)
 ;;; init.el ends here
