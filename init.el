@@ -5,10 +5,12 @@
 
 (defvar cargo-bin (expand-file-name "~/.cargo/bin"))
 (defvar local-bin (expand-file-name "~/.local/bin"))
+(defvar go-bin (expand-file-name "~/go/bin"))
 (add-to-list 'exec-path "/usr/local/bin")
 (add-to-list 'exec-path cargo-bin)
 (add-to-list 'exec-path local-bin)
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin))
+(add-to-list 'exec-path go-bin)
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin go-bin))
 (setenv "EDITOR" "emacsclient")
 
 
@@ -97,6 +99,13 @@
 (use-package js2-mode)
 (use-package haskell-mode)
 (use-package dockerfile-mode)
+
+(use-package pinentry
+  :init
+  (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version))
+  (pinentry-start)
+  )
+
 (use-package yasnippet
   :diminish
   :init (yas-global-mode 1))
@@ -148,7 +157,8 @@
   (:map lsp-mode-map ("M-?" . lsp-find-references))
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-         (rust-mode . lsp))
+         (rust-mode . lsp)
+         (go-mode . lsp))
   :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
@@ -163,6 +173,16 @@
 (use-package intero
   :init
   (add-hook 'haskell-mode-hook 'intero-mode))
+
+;;; ===========================================================
+;;; ===========================================================
+;;; ===========================================================
+
+;;; ===========================================================
+;;; ==================== Set up go ==========================
+;;; ===========================================================
+
+(use-package go-mode)
 
 ;;; ===========================================================
 ;;; ===========================================================
@@ -195,10 +215,6 @@
          ("s-l" . windmove-right)
          ))
 
-;; (global-set-key (kbd "s-h") 'windmove-left)
-;; (global-set-key (kbd "s-j") 'windmove-down)
-;; (global-set-key (kbd "s-k") 'windmove-up)
-;; (global-set-key (kbd "s-l") 'windmove-right)
 (global-set-key (kbd "s-K") 'kill-current-buffer)
 
 ;; set default term to zsh
