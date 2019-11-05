@@ -13,7 +13,6 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin go-bin))
 (setenv "EDITOR" "emacsclient")
 
-
 ;; the package manager
 (require 'package)
 (setq
