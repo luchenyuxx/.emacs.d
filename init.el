@@ -92,7 +92,6 @@
 
 
 (use-package ag)
-
 (use-package magit)
 (use-package json-mode)
 (use-package js2-mode)
