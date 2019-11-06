@@ -12,7 +12,7 @@
  '(auto-save-visited-mode t)
  '(column-number-mode t)
  '(create-lockfiles nil)
- '(custom-enabled-themes (quote (leuven)))
+ '(custom-enabled-themes (quote (deeper-blue)))
  '(display-line-numbers nil)
  '(display-line-numbers-type nil)
  '(display-time-mode t)
