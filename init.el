@@ -202,10 +202,10 @@
 
 (use-package cql-mode)
 
-(use-package avy
-  :init
-  (global-set-key (kbd "s-f") 'avy-goto-char)
-  (global-set-key (kbd "s-F") 'avy-goto-word-1))
+;; (use-package avy
+;;   :init
+;;   (global-set-key (kbd "s-f") 'avy-goto-char)
+;;   (global-set-key (kbd "s-F") 'avy-goto-word-1))
 
 (use-package windmove
   :bind (("s-h" . windmove-left)
