@@ -93,10 +93,16 @@
 
 (use-package ag)
 (use-package magit)
+(use-package forge
+  :after magit)
 (use-package json-mode)
 (use-package js2-mode)
 (use-package haskell-mode)
 (use-package dockerfile-mode)
+(use-package imenu-list
+  :init
+  (setq imenu-list-focus-after-activation t)
+  (setq imenu-list-auto-resize t))
 
 (use-package pinentry
   :init
@@ -201,10 +207,10 @@
 
 (use-package cql-mode)
 
-;; (use-package avy
-;;   :init
-;;   (global-set-key (kbd "s-f") 'avy-goto-char)
-;;   (global-set-key (kbd "s-F") 'avy-goto-word-1))
+(use-package avy
+  :init
+  (global-set-key (kbd "s-f") 'avy-goto-char)
+  (global-set-key (kbd "s-F") 'avy-goto-word-1))
 
 (use-package windmove
   :bind (("s-h" . windmove-left)
