@@ -13,6 +13,14 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin go-bin))
 (setenv "EDITOR" "emacsclient")
 
+;; If the system is windows
+(if (eq system-type 'windows-nt)
+    (progn
+      (setq w32-lwindow-modifier 'super) ; set left window key to super
+      (w32-register-hot-key [s-]) ; disable all super key bindings of windows
+      )
+)
+
 ;; the package manager
 (require 'package)
 (setq
