@@ -13,13 +13,6 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin go-bin))
 (setenv "EDITOR" "emacsclient")
 
-;; If the system is windows
-(if (eq system-type 'windows-nt)
-    (progn
-      (setq w32-lwindow-modifier 'super) ; set left window key to super
-      (w32-register-hot-key [s-]) ; disable all super key bindings of windows
-      )
-)
 
 ;; the package manager
 (require 'package)
@@ -69,6 +62,22 @@
   (evil-mode 1)
   )
 
+;; If the system is windows
+(if (eq system-type 'windows-nt)
+    (progn
+      (setq w32-lwindow-modifier 'super) ; set left window key to super
+      (w32-register-hot-key [s-]) ; disable all super key bindings of windows
+      )
+  ;; else
+  (progn
+    (use-package pinentry
+      :init
+      (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version))
+      (pinentry-start)
+      )
+    )
+  )
+
 (use-package undo-tree
   ;; Equivalent to (bind-key "s-z" 'undo-tree-undo)
   :bind (("s-z" . undo-tree-undo)
@@ -112,11 +121,6 @@
   (setq imenu-list-focus-after-activation t)
   (setq imenu-list-auto-resize t))
 
-(use-package pinentry
-  :init
-  (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version))
-  (pinentry-start)
-  )
 
 (use-package yasnippet
   :diminish
