@@ -17,6 +17,7 @@
  '(display-line-numbers-type nil)
  '(display-time-mode t)
  '(fill-column 80)
+ '(global-whitespace-mode nil)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(lsp-restart (quote ignore))
@@ -63,7 +64,7 @@
      ("t" "#+TITLE: ?"))))
  '(package-selected-packages
    (quote
-    (imenu-list forge pinentry js2-mode rust-mode newcomment cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection projectile evil use-package)))
+    (ejira imenu-list forge pinentry js2-mode rust-mode newcomment cql-mode yaml-mode diminish org-jira ag avy flycheck-ocaml tuareg neotree dockerfile-mode haskell-mode sbt-mode scala-mode json-mode projectile-ripgrep org-present popup-imenu evil-collection projectile evil use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)

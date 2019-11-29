@@ -62,16 +62,13 @@
   )
 
 (use-package undo-tree
-  ;; Equivalent to (bind-key "s-z" 'undo-tree-undo)
-  :bind (("s-z" . undo-tree-undo)
-         ("s-Z" . undo-tree-redo))
   :diminish)
 
 (use-package company
   :hook (after-init . global-company-mode)
   :diminish
   :init
-  (setq company-idle-delay 0))
+  (setq company-idle-delay 0.3))
 
 (use-package ivy
   :diminish
@@ -93,8 +90,7 @@
 
 (use-package ag)
 (use-package magit)
-(use-package forge
-  :after magit)
+(use-package forge :after magit)
 (use-package json-mode)
 (use-package js2-mode)
 (use-package haskell-mode)
@@ -197,11 +193,6 @@
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq neo-autorefresh nil)
   (defalias 'dired 'neotree-dir))
-;; ocaml support
-
-(use-package tuareg)
-
-(use-package flycheck-ocaml)
 
 (use-package yaml-mode)
 
@@ -220,16 +211,6 @@
          ))
 
 (global-set-key (kbd "s-K") 'kill-current-buffer)
-
-;; set default term to zsh
-(use-package term
-  :bind ("<s-return>" . ansi-term)
-  :init
-  (defvar my-term-shell "/usr/local/bin/zsh")
-  (defadvice ansi-term (before force-bash)
-    (interactive (list my-term-shell)))
-  (ad-activate 'ansi-term)
-  )
 
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
