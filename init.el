@@ -10,7 +10,7 @@
 (add-to-list 'exec-path cargo-bin)
 (add-to-list 'exec-path local-bin)
 (add-to-list 'exec-path go-bin)
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin local-bin go-bin))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:" cargo-bin ":" local-bin ":" go-bin))
 (setenv "EDITOR" "emacsclient")
 
 
@@ -40,8 +40,7 @@
 ;; auto update packages
 (use-package auto-package-update
   :init
-  (setq auto-package-update-delete-old-versions t)
-  (auto-package-update-maybe))
+  (setq auto-package-update-delete-old-versions t))
 
 (use-package diminish)
 
@@ -171,7 +170,8 @@
   :hook ((scala-mode . lsp)
          (rust-mode . lsp)
          (go-mode . lsp))
-  :config (setq lsp-prefer-flymake nil))
+  :config (setq lsp-prefer-flymake nil)
+  :commands lsp)
 
 (use-package lsp-ui)
 
